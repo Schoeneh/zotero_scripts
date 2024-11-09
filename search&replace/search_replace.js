@@ -4,9 +4,16 @@ var replace = prompt("What should it be replaced with?", "Foobar");
 
 // Search
 var fieldID = Zotero.ItemFields.getID(fieldName);
+
 var s = new Zotero.Search();
 s.libraryID = ZoteroPane.getSelectedLibraryID();
-s.addCondition(fieldName, 'contains', search);
+if (fieldName.includes("date")){
+    s.addCondition(fieldName, 'is', search);
+}
+else {
+    s.addCondition(fieldName, 'contains', search);
+}
+
 var ids = await s.search();
 // Zotero search 'contains' is case insensitive - results need to be filtered again
 var idsCorrect = [];
@@ -42,3 +49,7 @@ if (confirmed == true) {
     });
     alert(idsCorrect.length + " item(s) updated");
 }
+
+/* fields without search operator 'contains' (according to https://github.com/zotero/zotero/blob/5152d2c7ffdfac17a2ffe0f3fc0e3a01a6e51991/chrome/content/zotero/xpcom/data/searchConditions.js#L659)
+dateAdded, dateModified, datefield, 
+*/
