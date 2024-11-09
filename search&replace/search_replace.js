@@ -18,7 +18,7 @@ for (let id of ids) {
     }
 }
 
-if (!idsCorrect.length) {return "No items found";}
+if (!idsCorrect.length) {alert("No items found")}
 // Preview of Edit
 else {
     var previewItem = await Zotero.Items.getAsync(idsCorrect[0]);
