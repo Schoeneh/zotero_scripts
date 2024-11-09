@@ -1,5 +1,5 @@
 # Collection of scripts that enhance Zotero
-All tested using Zotero 7
+All developed + tested with Zotero 7
 ## Run JavaScript
 Simply copy-paste the content of the files into `'Tools' -> 'Developer' -> 'Run JavaScript'`  
 <img src="https://github.com/user-attachments/assets/dfe680c2-470e-43bd-9311-8ae149125612" alt="Screenshot" width="30%">
