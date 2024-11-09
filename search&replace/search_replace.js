@@ -5,6 +5,8 @@ if (!fieldID) {alert("Error: \""+fieldName+"\" is not a valid field."); return u
 var search = prompt("What characters/words should be searched for?", "Foo");
 var replace = prompt("What should it be replaced with?", "Foobar");
 
+const date = new Date(Date.now())
+const tag = "SnR_"+date.toISOString()
 // Search
 try {
     var s = new Zotero.Search();
@@ -42,6 +44,7 @@ try {
         await Zotero.DB.executeTransaction(async function () {
             for (let id of idsCorrect) {
                 let item = await Zotero.Items.getAsync(id);
+                item.addTag(tag);
                 let mappedFieldID = Zotero.ItemFields.getFieldIDFromTypeAndBase(item.itemTypeID, fieldName);
                 let oldValue = item.getField(fieldName);
                 let newValue = oldValue.replace(search, replace);
@@ -49,7 +52,7 @@ try {
                 await item.save();
             }
         });
-        alert(idsCorrect.length + " item(s) updated");
+        alert(idsCorrect.length + " item(s) updated.\n(See tag: "+tag+")");
     }
 }
 catch(err) {alert(err)}
