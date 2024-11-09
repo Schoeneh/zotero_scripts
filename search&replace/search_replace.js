@@ -1,6 +1,7 @@
 var fieldName = prompt("Which field should be searched?\n\nFor a list of all available fields see:\nhttps://api.zotero.org/itemFields", "title");
 var fieldID = Zotero.ItemFields.getID(fieldName);
-if (!fieldID) {alert("Error: \""+fieldName+"\" is not a valid field."); return undefinded}
+if (fieldName.includes("tag")){fieldName = "tag"}
+else if (!fieldID) {alert("Error: \""+fieldName+"\" is not a valid field."); return undefinded}
 
 var search = prompt("What characters/words should be searched for?", "Foo");
 var replace = prompt("What should it be replaced with?", "Foobar");
@@ -24,19 +25,27 @@ try {
     for (let id of ids) {
         var item = await Zotero.Items.getAsync(id);
         var fieldValue = item.getField(fieldName);
-        if (fieldValue.includes(search)) {
-            idsCorrect.push(id);
-        }
+        if (fieldValue.includes(search)) {idsCorrect.push(id);}
     }
+    if (fieldName == "tag"){idsCorrect = ids}
 
-    if (!idsCorrect.length) {alert("No items found")}
     // Preview of Edit
+    if (!idsCorrect.length) {alert("No items found")}
     else {
         var previewItem = await Zotero.Items.getAsync(idsCorrect[0]);
-        let previewOldValue = previewItem.getField(fieldName);
+        var previewOldValue = ""
+        //return previewItem;
+        if (fieldName == "tag") {
+            let previewTags = previewItem.getTags();
+            for (let element of previewTags){
+                if (element.tag.includes(search)){previewOldValue = element.tag}
+            }
+        }
+        else {previewOldValue = previewItem.getField(fieldName)}
+        
         let previewNewValue = previewOldValue.replace(search, replace);
         var confirmed = confirm(idsCorrect.length + " item(s) found" + "\n\n" +
-        "Old:\n" + previewItem.getField(fieldName) + "\n" + "New:\n" + previewNewValue);
+        "Old:\n" + previewOldValue + "\n" + "New:\n" + previewNewValue);
     }
 
     // Replace
