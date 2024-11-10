@@ -1,10 +1,22 @@
-# Zotero-S'n'R - Search and Replace for Zotero
-Zotero was and still is in dire need of a simple search and replace function. Consequently, I decided to learn JavaScript and coded a basic solution.  
-## What it does:
-1. First, provide the `$field` that should be searched ([full list of available fields and their names](https://api.zotero.org/itemFields?pprint=1)).
-2. Next, you need to provide the `$search-string` and `$replace-string` (2 further prompts).
-3. Then the script will start a search in your current library (`$field contains $search-string`); just as the normal 'Advanced Search' would do.
-5. After that, you will see how many items will be updated and a preview. Once you confirm, the script will perform the operation and tell you how many items were changed.
+# Search and Replace for Zotero
+Enhanced batch-editing with some safeguards and quality-of-life-improvements 
+## Features
+- **Interface** via JS-prompt, -confirm and -alert
+  - no modifying of code necessary; no cryptic messages/errors in `Run Javascript`-console  
+    <img src="https://github.com/user-attachments/assets/61cabc98-9aa4-4c3c-9113-ce5337ee8a77" height="140em">
+
+- **Safeguards**
+  - Editing of items only after preview and manual confirmation (one time)  
+    <img src="https://github.com/user-attachments/assets/6398fc76-a5ed-4aa3-93d0-0c9eae17a08c" height="140em">
+  - Unique tag for each run; including inputs and date/time  
+    <img src="https://github.com/user-attachments/assets/453987d6-4c02-47fa-868e-59892eacb806" height="20em">
+
+- **Undo** (=!= backup)
+  - Utilizing the unique tag & the search-scope 'all selected items'
+    1. Select all items with the unique tag of the run to undo
+    2. Set scope to 'all selected item'
+    3. Get field, search-string and replace-string from the unique tag and simply reverse
+    4. Profit
 
 ## What you should do:
 **Back up your local Zotero-library before using my script (or doing any batch-editing)!**
@@ -12,7 +24,6 @@ Zotero was and still is in dire need of a simple search and replace function. Co
 - [Official Documentation](https://www.zotero.org/support/zotero_data)
 
 
-## How to use it -- 1: "Run JavaScript"
-The easiest way of running Zotero-S'n'R is to copy the code from '[src/basic_script.js](https://github.com/Schoeneh/zotero-s-n-r/releases/latest/download/basic_script.js)' into Tools --> Developer --> Run Javascript:
-
-![Screenshot showing the menu and submenus: Tools, Developer, Run JavaScript](doc/screenshot_developer.png)
+## How to use: `Run JavaScript`
+Simply copy-paste the content of [search_replace.js](https://github.com/Schoeneh/zotero_scripts/blob/main/search%26replace/search_replace.js) into `'Tools' -> 'Developer' -> 'Run JavaScript'`  
+<img src="https://github.com/user-attachments/assets/dfe680c2-470e-43bd-9311-8ae149125612" height="260em">
