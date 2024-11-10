@@ -1,8 +1,10 @@
+const scope = prompt("Search in whole library (0) or only in all currently selected items (1)?", 0);
+if (!(scope == 0 || scope == 1)){alert("<SnR-Error> \""+scope+"\" is not a valid scope."); return}
 var fieldName = prompt("Which field should be searched?\n\nFor a list of all available fields see:\nhttps://api.zotero.org/itemFields", "title");
 var fieldID = Zotero.ItemFields.getID(fieldName);
 var Tag = false;
 if (fieldName.includes("tag")){fieldName = "tag", Tag = true}
-else if (!fieldID) {alert("Error: \""+fieldName+"\" is not a valid field."); return}
+else if (!fieldID) {alert("<SnR-Error> \""+fieldName+"\" is not a valid field."); return}
 
 var search = prompt("What characters/words (case-sensitive) should be searched for?", "Foo");
 var replace = prompt("What should it be replaced with?", "Foobar");
@@ -11,17 +13,21 @@ const date = new Date(Date.now())
 const uniqueTag = "SnR_"+fieldName+"_"+search+"_"+replace+"_"+date.toISOString()
 // Search
 try {
-    var s = new Zotero.Search();
-    s.libraryID = ZoteroPane.getSelectedLibraryID();
+    if (scope == 0){
+        var s = new Zotero.Search();
+        s.libraryID = ZoteroPane.getSelectedLibraryID();
+        if (fieldName.includes("date")){s.addCondition(fieldName, 'is', search)}
+        else {s.addCondition(fieldName, 'contains', search)}
+        var ids = await s.search();
+    }
+    else if (scope == 1){
+        var ids = [];
+        var selected_items = Zotero.getActiveZoteroPane().getSelectedItems();
+        for (let element in selected_items){
+            ids.push(selected_items[element].getID())
+        }
+    }
     
-    if (fieldName.includes("date")){
-        s.addCondition(fieldName, 'is', search);
-    }
-    else {
-        s.addCondition(fieldName, 'contains', search);
-    }
-
-    var ids = await s.search();
     // Zotero search 'contains' is case insensitive - results need to be filtered again
     var idsCorrect = [];
     for (let id of ids) {
@@ -79,7 +85,7 @@ try {
         alert(idsCorrect.length + " item(s) updated.\n(See tag: "+uniqueTag+")");
     }
 }
-catch(err) {alert("SnR-Error:\n"+err+"\nfieldName: "+fieldName+"\n"+"search: "+search+"\nreplace: "+replace+"\n\nFeel free to open an issue at https://github.com/Schoeneh/zotero_scripts/issues and include this error-message.")}
+catch(err) {alert("<SnR-Error>\n"+err+"\nscope: "+scope+"\nfieldName: "+fieldName+"\n"+"search: "+search+"\nreplace: "+replace+"\n\nFeel free to open an issue at https://github.com/Schoeneh/zotero_scripts/issues and include this error-message.")}
 
 /* fields without search operator 'contains' (according to https://github.com/zotero/zotero/blob/5152d2c7ffdfac17a2ffe0f3fc0e3a01a6e51991/chrome/content/zotero/xpcom/data/searchConditions.js#L659)
 dateAdded, dateModified, datefield, 
