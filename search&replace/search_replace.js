@@ -2,9 +2,9 @@ var fieldName = prompt("Which field should be searched?\n\nFor a list of all ava
 var fieldID = Zotero.ItemFields.getID(fieldName);
 var Tag = false;
 if (fieldName.includes("tag")){fieldName = "tag", Tag = true}
-else if (!fieldID) {alert("Error: \""+fieldName+"\" is not a valid field."); return undefinded}
+else if (!fieldID) {alert("Error: \""+fieldName+"\" is not a valid field."); return}
 
-var search = prompt("What characters/words should be searched for?", "Foo");
+var search = prompt("What characters/words (case-sensitive) should be searched for?", "Foo");
 var replace = prompt("What should it be replaced with?", "Foobar");
 
 const date = new Date(Date.now())
@@ -68,9 +68,9 @@ try {
                 }
                 else {
                     await Zotero.DB.executeTransaction(async function () {
-                        let mappedFieldID = Zotero.ItemFields.getFieldIDFromTypeAndBase(item.itemTypeID, fieldName);
                         let oldValue = item.getField(fieldName);
                         let newValue = oldValue.replace(search, replace);
+                        let mappedFieldID = Zotero.ItemFields.getFieldIDFromTypeAndBase(item.itemTypeID, fieldName);
                         item.setField(mappedFieldID ? mappedFieldID : fieldID, newValue);
                         await item.save();
                 })
