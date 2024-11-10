@@ -8,7 +8,7 @@ var search = prompt("What characters/words (case-sensitive) should be searched f
 var replace = prompt("What should it be replaced with?", "Foobar");
 
 const date = new Date(Date.now())
-const uniqueTag = "SnR_"+date.toISOString()
+const uniqueTag = "SnR_"+fieldName+"_"+search+"_"+replace+"_"+date.toISOString()
 // Search
 try {
     var s = new Zotero.Search();
