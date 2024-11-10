@@ -79,7 +79,7 @@ try {
         alert(idsCorrect.length + " item(s) updated.\n(See tag: "+uniqueTag+")");
     }
 }
-catch(err) {alert(err)}
+catch(err) {alert("SnR-Error:\n"+err+"\nfieldName: "+fieldName+"\n"+"search: "+search+"\nreplace: "+replace+"\n\nFeel free to open an issue at https://github.com/Schoeneh/zotero_scripts/issues and include this error-message.")}
 
 /* fields without search operator 'contains' (according to https://github.com/zotero/zotero/blob/5152d2c7ffdfac17a2ffe0f3fc0e3a01a6e51991/chrome/content/zotero/xpcom/data/searchConditions.js#L659)
 dateAdded, dateModified, datefield, 
