@@ -1,0 +1,8 @@
+{
+  "apiPrefix":"https://sru.kobv.de/k2?version=1.1&operation=searchRetrieve&query=dc.identifier%3D",
+  "apiSuffix":"&startRecord=1&maximumRecords=10&recordSchema=marcxml&recordPacking=xml&stylesheet=",
+  "namespace1":"http://www.loc.gov/zing/srw/",
+  "namespace2":"http://www.loc.gov/MARC21/slim",
+  "eval1":"//zs:records/zs:record/zs:recordData",
+  "eval2":"//datafield[@tag='084' and subfield[@code='2'] = 'rvk']/subfield[@code='a']"
+}
