@@ -9,7 +9,7 @@ A script for batch-editing items; implements 'Search & Replace' in multiple step
 A script to get the RVK-notation ([Regensburger Verbundklassifikation](https://rvk.uni-regensburg.de/?view=article&id=141&catid=2)) of all selected items from the KOBV-catalogue ([Kooperativer Bibliotheksverbund Berlin-Brandenburg](https://www.kobv.de/)), using the ISBN (if provided)
 ### [Utilities](https://github.com/Schoeneh/zotero_scripts/tree/main/utilities)
 - [tag_selected](https://github.com/Schoeneh/zotero_scripts/blob/main/utilities/tag_selected.js)
-  - Tags all selected items with the chosen tag
+  - Tags all selected items with the provided string
 ## Translators
 Simply copy-paste the whole file into `'..\Users\$USER\Zotero\$PROFILE\translators'`
 ### [Export](https://github.com/Schoeneh/zotero_scripts/tree/main/translators/export)
