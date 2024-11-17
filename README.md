@@ -5,7 +5,7 @@ Simply copy-paste the content of the files into `'Tools' -> 'Developer' -> 'Run 
 <img src="https://github.com/user-attachments/assets/dfe680c2-470e-43bd-9311-8ae149125612" alt="Screenshot" width="30%">
 ### [Search & Replace](/run-javascript/search%26replace)
 A script for batch-editing items; implements 'Search & Replace' in multiple steps; showing a preview and asking for confirmation
-### [Catalog-Data to Item-Field](/run-javascript/isbn2rvk)
+### [Catalog-Data to Item-Field](/run-javascript/catalog-data2item-field)
 A script for getting specific data from the catalog of holding institutions and writing to to item-fields the RVK-notation
 ### [Utilities](/utilities)
 - [tag_selected](/utilities/tag_selected.js)
