@@ -39,6 +39,7 @@ try {
     } catch(err) {alert("<Error>\n"+err+"\n\n Please open an issue with this message at https://github.com/Schoeneh/zotero_scripts/issues")}
 
 var invalidResponseItems = [];
+var count = 0;
 try {
     for (item of queryItems){
         let node1 = null;
@@ -59,6 +60,7 @@ try {
                 item.setField('archiveLocation', RVK[0]);
                 item.addTag(operation + "_" + date.toISOString());
                 await item.saveTx();
+                count++;
             }
         } catch {alert("API didn't answer.")}
     }
@@ -86,7 +88,9 @@ try {
         var coll_err_resp_null = new Zotero.Collection();
         coll_err_resp_null.name = operation + "_Err:ResponseInvalid_" + date.toISOString();
         await coll_err_resp_null.saveTx();
-    } else {alert("<Error>\nSaving invalid items\n\n Please open an issue with this message at https://github.com/Schoeneh/zotero_scripts/issues")}
+    }
+
+    confirm("Success!\nModified "+count+" items (see tag \'"+(operation + "_" + date.toISOString())+"\'\n\nFor (potential) errors and invalid responses see collections \'"+(operation + "_Err:ISBNinvalid")+"\' and \'"+(operation + "_Err:ResponseInvalid")+"\'.\n\n\nMade by Henrik Schönemann\nFeature-requests etc. welcome, see https://github.com/Schoeneh/zotero_scripts/issues?q=is%3Aopen%20is%3Aissue%20project%3Aschoeneh%2F9")
 
 } catch (error) {alert("<Error>\n"+err+"\n\n Please open an issue with this message at https://github.com/Schoeneh/zotero_scripts/issues")}
 
@@ -95,19 +99,12 @@ function list_operations(pathAPIs) {
 }
 
 function nsResolver(prefix) {
+    //Easy to add more namespaces and their prefixes
     const ns = {
         zs:"http://www.loc.gov/zing/srw/",
         marc21xml:"http://www.loc.gov/MARC21/slim"
     }
     return ns[prefix] || null
-}
-function ns_zs(prefix) {
-    alert("prefix: "+prefix);
-    return "http://www.loc.gov/zing/srw/"
-}
-function ns_marc21xml(prefix) {
-    alert("prefix: "+prefix);
-    return "http://www.loc.gov/MARC21/slim"
 }
 
 function configs() {
