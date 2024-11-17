@@ -6,7 +6,7 @@ Simply copy-paste the content of the files into `'Tools' -> 'Developer' -> 'Run 
 ### [Search & Replace](/run-javascript/search%26replace)
 A script for batch-editing items; implements 'Search & Replace' in multiple steps; showing a preview and asking for confirmation
 ### [Catalog-Data to Item-Field](/run-javascript/catalog-data2item-field)
-A script for getting specific data from the catalog of holding institutions and writing to to item-fields the RVK-notation
+- Getting [RVK-notation](https://rvk.uni-regensburg.de/?view=article&id=141&catid=2) for item(-s)
 ### [Utilities](/utilities)
 - [tag_selected](/utilities/tag_selected.js)
   - Tags all selected items with the provided string
