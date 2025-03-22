@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> This repository has migrated to https://codeberg.org/Schoeneh/zotero_scripts
+
 # Collection of scripts that enhance Zotero
 All developed + tested with Zotero 7
 ## Scripts utilizing native `Run JavaScript`
